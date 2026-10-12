@@ -2,7 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,800;125,900&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
-<meta name="description" content="Painting and handyman work in Quincy and the South Shore. Request a free quote on WhatsApp.">
+<meta name="description" content="Painting and handyman work anywhere in Massachusetts. Request a free quote by WhatsApp or text.">
 <style>
 /* Layout: one short column — hero, services as paint chips, quote form that hands off to WhatsApp. */
 :root{
@@ -112,7 +112,7 @@ footer{border-top:1px solid var(--line);padding-block:1.8rem 2.5rem;color:var(--
 
 <main class="wrap" id="top">
   <section class="hero">
-    <span class="eyebrow">Quincy &amp; the South Shore</span>
+    <span class="eyebrow">Serving all of Massachusetts</span>
     <h1>Fresh paint. <span class="tape">Fixed right.</span></h1>
     <p>Painting, drywall, trim and the small repairs that pile up. Send your job in a minute and get a quote by WhatsApp or text.</p>
     <a class="btn" href="#quote">Request a free quote</a>
@@ -135,14 +135,14 @@ footer{border-top:1px solid var(--line);padding-block:1.8rem 2.5rem;color:var(--
       <div>
         <div class="head"><span class="eyebrow">Free quote</span><h2>Tell us about the job</h2>
           <p>Fill this out and pick WhatsApp or text. Your request opens ready to send. Tap send, and we reply on your phone, usually the same day.</p></div>
-        <span class="eyebrow">Service area</span>
-        <div class="area"><span>Quincy</span><span>Braintree</span><span>Milton</span><span>Weymouth</span><span>Dorchester</span><span>Randolph</span><span>Hingham</span></div>
+        <span class="eyebrow">Service area: all of Massachusetts</span>
+        <div class="area"><span>Greater Boston</span><span>South Shore</span><span>North Shore</span><span>MetroWest</span><span>Central Mass</span><span>Cape Cod &amp; Islands</span><span>Western Mass</span></div>
       </div>
 
       <form class="quote" id="quoteForm" novalidate>
         <div class="grid2">
           <div class="field"><label for="name">Your name</label><input type="text" id="name" autocomplete="name"><span class="err" hidden>Enter your name.</span></div>
-          <div class="field"><label for="town">Town or address</label><input type="text" id="town" autocomplete="address-level2" placeholder="e.g. Wollaston, Quincy"><span class="err" hidden>Tell us where the job is.</span></div>
+          <div class="field"><label for="town">Town or address</label><input type="text" id="town" autocomplete="address-level2" placeholder="e.g. Worcester, MA"><span class="err" hidden>Tell us where the job is.</span></div>
         </div>
         <fieldset id="svcSet">
           <legend>What do you need?</legend>
@@ -173,14 +173,13 @@ footer{border-top:1px solid var(--line);padding-block:1.8rem 2.5rem;color:var(--
         <div class="after" id="after" role="status" hidden>
           <b id="afterTitle">Almost done</b>
           <p id="afterText"></p>
-          <p class="after-fallback">Nothing opened? Copy your request and text it to <b data-biz="phone">(781) 975-3075</b>.</p>
+          <p class="after-fallback">Nothing opened? Try the other button above, or copy your request so you don't have to type it again.</p>
           <div class="after-btns">
             <button type="button" class="copy" id="copyMsg">Copy my request</button>
-            <button type="button" class="copy" id="copyNum">Copy number</button>
           </div>
           <textarea id="msgPreview" readonly aria-label="Your request" rows="6"></textarea>
         </div>
-        <p class="hint">Either way, your request comes straight to our phone. Or call <span data-biz="phone">(781) 975-3075</span>.</p>
+        <p class="hint">Either way, your request comes straight to us.</p>
       </form>
     </div>
   </section>
@@ -188,7 +187,7 @@ footer{border-top:1px solid var(--line);padding-block:1.8rem 2.5rem;color:var(--
 
 <footer class="wrap">
   <span>© <span id="yr">2026</span> <span data-biz="name">Granite City</span> Painting &amp; Handyman</span>
-  <span data-biz="phone">(781) 975-3075</span>
+  <span>Serving all of Massachusetts</span>
 </footer>
 
 <script>
@@ -237,8 +236,8 @@ var WHATSAPP_NUMBER = "17819753075";      // your number for WhatsApp and texts:
     update();
     // We can't see whether they pressed Send in the other app, so say what's left to do.
     $('afterText').textContent = via==='wa'
-      ? 'WhatsApp should open with your request already typed to '+pretty+'. Tap Send there to finish, and we’ll reply on WhatsApp.'
-      : 'Your Messages app should open with your request already typed to '+pretty+'. Tap Send there to finish, and we’ll text you back.';
+      ? 'WhatsApp should open with your request already typed to us. Tap Send there to finish, and we’ll reply on WhatsApp.'
+      : 'Your Messages app should open with your request already typed to us. Tap Send there to finish, and we’ll text you back.';
     $('msgPreview').value=message();
     $('after').hidden=false;
     setTimeout(function(){$('after').scrollIntoView({block:'nearest',behavior:'smooth'})},300);
@@ -256,7 +255,6 @@ var WHATSAPP_NUMBER = "17819753075";      // your number for WhatsApp and texts:
     try{navigator.clipboard.writeText(text).then(done,fallback)}catch(x){fallback()}
   }
   $('copyMsg').addEventListener('click',function(){copy(this,message(),'Copy my request',$('msgPreview'))});
-  $('copyNum').addEventListener('click',function(){copy(this,pretty,'Copy number',document.querySelector('.after-fallback b'))});
   update();
 })();
 </script>
