@@ -171,13 +171,9 @@ footer{border-top:1px solid var(--line);padding-block:1.8rem 2.5rem;color:var(--
           Send by text message
         </a>
         <div class="after" id="after" role="status" hidden>
-          <b id="afterTitle">Almost done</b>
-          <p id="afterText"></p>
-          <p class="after-fallback">Nothing opened? Try the other button above, or copy your request so you don't have to type it again.</p>
-          <div class="after-btns">
-            <button type="button" class="copy" id="copyMsg">Copy my request</button>
-          </div>
-          <textarea id="msgPreview" readonly aria-label="Your request" rows="6"></textarea>
+          <b id="afterTitle">Thank you for your request!</b>
+          <p>We'll get back to you soon.</p>
+          <p class="after-fallback" id="afterText"></p>
         </div>
         <p class="hint">Either way, your request comes straight to us.</p>
       </form>
@@ -234,27 +230,14 @@ var WHATSAPP_NUMBER = "17819753075";      // your number for WhatsApp and texts:
     var anySvc=services().length>0;err($('svcSet'),!anySvc);if(!anySvc&&!first)first=f.querySelector('#svcSet input');
     if(first){e.preventDefault();first.focus();$('after').hidden=true;return}
     update();
-    // We can't see whether they pressed Send in the other app, so say what's left to do.
-    $('afterText').textContent = via==='wa'
-      ? 'WhatsApp should open with your request already typed to us. Tap Send there to finish, and we’ll reply on WhatsApp.'
-      : 'Your Messages app should open with your request already typed to us. Tap Send there to finish, and we’ll text you back.';
-    $('msgPreview').value=message();
+    // The request only reaches us once they tap Send in the other app, so keep a short reminder.
+    $('afterText').textContent = 'Just make sure you tapped Send in '+(via==='wa'?'WhatsApp':'Messages')+'.';
     $('after').hidden=false;
     setTimeout(function(){$('after').scrollIntoView({block:'nearest',behavior:'smooth'})},300);
   }
   btn.addEventListener('click',function(e){check(e,'wa')});
   smsBtn.addEventListener('click',function(e){check(e,'sms')});
 
-  function copy(btnEl,text,label,selectEl){
-    var done=function(){btnEl.textContent='Copied';setTimeout(function(){btnEl.textContent=label},1600)};
-    var fallback=function(){
-      if(selectEl.select){selectEl.focus();selectEl.select()}
-      else{var r=document.createRange();r.selectNodeContents(selectEl);var s=getSelection();s.removeAllRanges();s.addRange(r)}
-      btnEl.textContent='Selected, press Copy';
-    };
-    try{navigator.clipboard.writeText(text).then(done,fallback)}catch(x){fallback()}
-  }
-  $('copyMsg').addEventListener('click',function(){copy(this,message(),'Copy my request',$('msgPreview'))});
   update();
 })();
 </script>
